@@ -1,4 +1,7 @@
-import sys, pygame, time
+import sys
+import pygame
+import time
+
 from pygame.locals import *
 from pygame.color import *
 pygame.init()
