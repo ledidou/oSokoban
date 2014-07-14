@@ -15,7 +15,7 @@ larg = 64
 black = 0,0,0
 
 
-img = pygame.image.load("911.png")
+img = pygame.image.load("Perso1Down.png")
 
 def End():
     for x in range(10) :
@@ -163,19 +163,9 @@ while True :
         ]
         posX = 7
         posY = 6
-    if Perso == 1 :
-        img = pygame.image.load("911.png")
-    elif Perso == 2 :
-        img = pygame.image.load("921.png")          
-    elif Perso == 3 :
-        img = pygame.image.load("931.png")
-    elif Perso == 4 :
-        img = pygame.image.load("941.png")
-    elif Perso == 5 :
-        img = pygame.image.load("951.png")
-        
-        
     
+    img = pygame.image.load("Perso %s Down.png")%Perso
+  
     while End() != 1 and Reset != 1:
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
@@ -218,16 +208,7 @@ while True :
 
             
         if (keys[K_LEFT] and not keys_old[K_LEFT]):
-            if Perso == 1 :               
-                img = pygame.image.load("914.png")
-            elif Perso == 2 :
-                img = pygame.image.load("924.png")
-            elif Perso == 3 :
-                img = pygame.image.load("934.png")
-            elif Perso == 4 :
-                img = pygame.image.load("944.png") 
-            elif Perso == 5 :
-                img = pygame.image.load("954.png") 
+        img = pygame.image.load("Perso %s Left.png")%Perso
             if testCol(posX - 1 ,posY):
                 posX = posX -1
             elif ((getMap(posX-1,posY)==2) and (getMap(posX-2,posY)==0)): # si diammant et case vide
@@ -247,16 +228,7 @@ while True :
                 setMap(posX-2,posY,4)
                 posX = posX - 1
         if (keys[K_RIGHT] and not keys_old[K_RIGHT]):
-            if Perso == 1 :               
-                img = pygame.image.load("913.png")
-            elif Perso == 2 :
-                img = pygame.image.load("923.png")
-            elif Perso == 3 :
-                img = pygame.image.load("933.png")
-            elif Perso == 4 :
-                img = pygame.image.load("943.png")
-            elif Perso == 5 :
-                img = pygame.image.load("953.png")    
+        img = pygame.image.load("Perso %s Right.png")%Perso 
             if testCol(posX + 1 ,posY):
                 posX = posX + 1
             elif ((getMap(posX+1,posY)==2) and (getMap(posX+2,posY)==0)): # si diammant et case vide
@@ -276,16 +248,7 @@ while True :
                 setMap(posX+2,posY,4)
                 posX = posX + 1
         if (keys[K_DOWN] and not keys_old[K_DOWN]):
-            if Perso == 1 :               
-                img = pygame.image.load("911.png")
-            elif Perso == 2 :
-                img = pygame.image.load("921.png")
-            elif Perso == 3 :
-                img = pygame.image.load("931.png")
-            elif Perso == 4 :
-                img = pygame.image.load("941.png")
-            elif Perso == 5 :
-                img = pygame.image.load("951.png")   
+        img = pygame.image.load("Perso %s Down.png")%Perso 
             if testCol(posX ,posY +1 ):
                 posY = posY + 1
             elif ((getMap(posX,posY+1)==2) and (getMap(posX,posY+2)==0)): # si diammant et case vide
@@ -305,16 +268,7 @@ while True :
                 setMap(posX,posY+2,4)
                 posY = posY + 1
         if (keys[K_UP] and not keys_old[K_UP]): # si touche up
-            if Perso == 1 :               
-                img = pygame.image.load("912.png")
-            elif Perso == 2 :
-                img = pygame.image.load("922.png")
-            elif Perso == 3 :
-                img = pygame.image.load("932.png")
-            elif Perso == 4 :
-                img = pygame.image.load("942.png")
-            elif Perso == 5 :
-                img = pygame.image.load("952.png")   
+        img = pygame.image.load("Perso %s Up.png")%Perso 
             if testCol(posX ,posY -1 ):        # si case vide y
                 posY = posY - 1                 # aller en y-
             elif ((getMap(posX,posY-1)==2) and (getMap(posX,posY-2)==0)): # si diammant et case vide
