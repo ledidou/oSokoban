@@ -1,5 +1,5 @@
-import sys
 import pygame
+import sys
 import time
 
 from pygame.locals import *
@@ -16,6 +16,7 @@ black = 0,0,0
 
 
 img = pygame.image.load("Perso1Down.png")
+
 
 def End():
     for x in range(10) :
@@ -164,7 +165,7 @@ while True :
         posX = 7
         posY = 6
     
-    img = pygame.image.load("Perso %s Down.png")%Perso
+    img = pygame.image.load("Perso%sDown.png" % Perso )
   
     while End() != 1 and Reset != 1:
         for event in pygame.event.get():
@@ -208,7 +209,7 @@ while True :
 
             
         if (keys[K_LEFT] and not keys_old[K_LEFT]):
-        img = pygame.image.load("Perso %s Left.png")%Perso
+            img = pygame.image.load("Perso%sLeft.png"%Perso)
             if testCol(posX - 1 ,posY):
                 posX = posX -1
             elif ((getMap(posX-1,posY)==2) and (getMap(posX-2,posY)==0)): # si diammant et case vide
@@ -228,7 +229,7 @@ while True :
                 setMap(posX-2,posY,4)
                 posX = posX - 1
         if (keys[K_RIGHT] and not keys_old[K_RIGHT]):
-        img = pygame.image.load("Perso %s Right.png")%Perso 
+            img = pygame.image.load("Perso%sRight.png"%Perso) 
             if testCol(posX + 1 ,posY):
                 posX = posX + 1
             elif ((getMap(posX+1,posY)==2) and (getMap(posX+2,posY)==0)): # si diammant et case vide
@@ -248,7 +249,7 @@ while True :
                 setMap(posX+2,posY,4)
                 posX = posX + 1
         if (keys[K_DOWN] and not keys_old[K_DOWN]):
-        img = pygame.image.load("Perso %s Down.png")%Perso 
+            img = pygame.image.load( "Perso%sDown.png" % Perso ) 
             if testCol(posX ,posY +1 ):
                 posY = posY + 1
             elif ((getMap(posX,posY+1)==2) and (getMap(posX,posY+2)==0)): # si diammant et case vide
@@ -268,7 +269,7 @@ while True :
                 setMap(posX,posY+2,4)
                 posY = posY + 1
         if (keys[K_UP] and not keys_old[K_UP]): # si touche up
-        img = pygame.image.load("Perso %s Up.png")%Perso 
+            img = pygame.image.load("Perso%sUp.png"%Perso) 
             if testCol(posX ,posY -1 ):        # si case vide y
                 posY = posY - 1                 # aller en y-
             elif ((getMap(posX,posY-1)==2) and (getMap(posX,posY-2)==0)): # si diammant et case vide
@@ -303,7 +304,6 @@ while True :
 
 
 themap =  [ [6,6,6,6,6,6,6,6,6,6],
-            [6,6,6,6,6,6,6,6,6,6],
             [6,6,6,6,6,6,6,6,6,6],
             [6,6,6,6,6,6,6,6,6,6],
             [6,6,6,6,6,6,6,6,6,6],
