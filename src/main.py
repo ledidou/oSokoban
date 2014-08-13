@@ -5,11 +5,13 @@ import time
 from pygame.locals import *
 from pygame.color import *
 pygame.init()
+ani = 1
 Perso = 1
 Reset = 0
 lvl = 0     
 tiles = []
-
+a = 0
+b = 0
 larg = 64
 
 black = 0,0,0
@@ -39,6 +41,44 @@ def setMap(x,y,val):
     
 def testCol(x,y): 
     return getMap(x,y)==0 or getMap(x,y)==3
+
+def Push(posX,posY,ani):
+    print ani
+    if ani == 1 :
+        a = posX + 0
+        b = posY + 1
+        c = posX + 0
+        d = posY + 2
+    elif ani == 2 :
+        a = posX - 1
+        b = posY + 0
+        c = posX - 2
+        d = posY + 0
+    elif ani == 3 :
+        a = posX + 1
+        b = posY + 0
+        c = posX + 2
+        d = posY + 0
+    elif ani == 4 :
+        a = posX + 0
+        b = posY - 1
+        c = posX + 0
+        d = posY - 2
+    print a,b
+    if ((getMap(a,b)==2) and (getMap(c,d)==0)): # si diammant et case vide
+        setMap(a,b,0)
+        setMap(c,d,2)
+        print a
+    elif ((getMap(a,b)==2) and (getMap(c,d)==3)):
+        setMap(a,b,0)
+        setMap(c,d,4)
+    elif ((getMap(a,b)==4) and (getMap(c,d)==0)): # si diammant et case vide
+        setMap(a,b,3)
+        setMap(c,d,2)
+    elif ((getMap(a,b)==4) and (getMap(c,d)==3)): # si diammant et case vide
+        setMap(a,b,3)
+        setMap(c,d,4)
+    
         
 for i in range(14):
     tiles.append( pygame.image.load("%s.png" % i ) )
@@ -210,87 +250,45 @@ while True :
             
         if (keys[K_LEFT] and not keys_old[K_LEFT]):
             img = pygame.image.load("Perso%sLeft.png"%Perso)
-            if testCol(posX - 1 ,posY):
-                posX = posX -1
-            elif ((getMap(posX-1,posY)==2) and (getMap(posX-2,posY)==0)): # si diammant et case vide
-                setMap(posX-1,posY,0)
-                setMap(posX-2,posY,2)
-                posX = posX - 1
-            elif ((getMap(posX-1,posY)==2) and (getMap(posX-2,posY)==3)):
-                setMap(posX-1,posY,0)
-                setMap(posX-2,posY,4)
-                posX = posX - 1
-            elif ((getMap(posX-1,posY)==4) and (getMap(posX-2,posY)==0)): # si diammant et case vide
-                setMap(posX-1,posY,3)
-                setMap(posX-2,posY,2)
-                posX = posX - 1
-            elif ((getMap(posX-1,posY)==4) and (getMap(posX-2,posY)==3)): # si diammant et case vide
-                setMap(posX-1,posY,3)
-                setMap(posX-2,posY,4)
-                posX = posX - 1
+            if ani == 2 :
+                if testCol(posX - 1 ,posY):
+                    posX = posX -1
+            if ani != 2 :
+                ani = 2
+                    
         if (keys[K_RIGHT] and not keys_old[K_RIGHT]):
             img = pygame.image.load("Perso%sRight.png"%Perso) 
-            if testCol(posX + 1 ,posY):
-                posX = posX + 1
-            elif ((getMap(posX+1,posY)==2) and (getMap(posX+2,posY)==0)): # si diammant et case vide
-                setMap(posX+1,posY,0)
-                setMap(posX+2,posY,2)
-                posX = posX + 1
-            elif ((getMap(posX+1,posY)==2) and (getMap(posX+2,posY)==3)):
-                setMap(posX+1,posY,0)
-                setMap(posX+2,posY,4)
-                posX = posX + 1
-            elif ((getMap(posX+1,posY)==4) and (getMap(posX+2,posY)==0)):
-                setMap(posX+1,posY,3)
-                setMap(posX+2,posY,2)
-                posX = posX + 1
-            elif ((getMap(posX+1,posY)==4) and (getMap(posX+2,posY)==3)):
-                setMap(posX+1,posY,3)
-                setMap(posX+2,posY,4)
-                posX = posX + 1
+            if ani == 3 :
+                if testCol(posX +1,posY  ):        
+                    posX = posX +1
+            elif ani != 3 :
+                ani = 3                
+
         if (keys[K_DOWN] and not keys_old[K_DOWN]):
             img = pygame.image.load( "Perso%sDown.png" % Perso ) 
-            if testCol(posX ,posY +1 ):
-                posY = posY + 1
-            elif ((getMap(posX,posY+1)==2) and (getMap(posX,posY+2)==0)): # si diammant et case vide
-                setMap(posX,posY+1,0)
-                setMap(posX,posY+2,2)
-                posY = posY + 1
-            elif ((getMap(posX,posY+1)==2) and (getMap(posX,posY+2)==3)):
-                setMap(posX,posY+1,0)
-                setMap(posX,posY+2,4)
-                posY = posY + 1
-            elif ((getMap(posX,posY+1)==4) and (getMap(posX,posY+2)==0)): # si diammant et case vide
-                setMap(posX,posY+1,3)
-                setMap(posX,posY+2,2)
-                posY = posY + 1
-            elif ((getMap(posX,posY+1)==4) and (getMap(posX,posY+2)==3)): # si diammant et case vide
-                setMap(posX,posY+1,3)
-                setMap(posX,posY+2,4)
-                posY = posY + 1
-        if (keys[K_UP] and not keys_old[K_UP]): # si touche up
+            if ani == 1 :
+                if testCol(posX ,posY +1 ):
+                    posY = posY + 1
+            elif ani != 1 :
+                ani = 1  
+                
+                
+        if (keys[K_UP] and not keys_old[K_UP]):
             img = pygame.image.load("Perso%sUp.png"%Perso) 
-            if testCol(posX ,posY -1 ):        # si case vide y
-                posY = posY - 1                 # aller en y-
-            elif ((getMap(posX,posY-1)==2) and (getMap(posX,posY-2)==0)): # si diammant et case vide
-                setMap(posX,posY-1,0)
-                setMap(posX,posY-2,2)
-                posY = posY - 1
-            elif ((getMap(posX,posY-1)==2) and (getMap(posX,posY-2)==3)):
-                setMap(posX,posY-1,0)
-                setMap(posX,posY-2,4)
-                posY = posY - 1
-            elif ((getMap(posX,posY-1)==4) and (getMap(posX,posY-2)==0)): # si diammant et case vide
-                setMap(posX,posY-1,3)
-                setMap(posX,posY-2,2)
-                posY = posY - 1
-            elif ((getMap(posX,posY-1)==4) and (getMap(posX,posY-2)==3)): # si diammant et case vide
-                setMap(posX,posY-1,3)
-                setMap(posX,posY-2,4)
-                posY = posY - 1
+            if ani == 4 :
+                if testCol(posX ,posY -1 ):        
+                    posY = posY - 1
+            elif ani != 4 :
+                ani = 4                
+
         if (keys[K_SPACE] and not keys_old[K_SPACE]):
             Reset = 1
             lvl = lvl - 1 
+        
+        if (keys[K_LALT] and not keys_old[K_LALT]):
+            Push(posX,posY,ani)
+    
+    
         keys_old = keys
         pygame.display.flip()
     Reset = 0
