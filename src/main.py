@@ -6,6 +6,7 @@ from pygame.locals import *
 from pygame.color import *
 pygame.init()
 ani = 1
+dir = 1
 Perso = 1
 Reset = 0
 lvl = 0     
@@ -17,23 +18,23 @@ larg = 64
 black = 0,0,0
 
 
-img = pygame.image.load("Perso1Down.png")
+img = pygame.image.load("Perso/Perso1/Down.png")
 
 
 def End():
-    for x in range(10) :
-        for y in range(10) :
+    for x in range(16) :
+        for y in range(12) :
             if getMap(x,y) == 3 :
                 return False
     return True
 
 def dispmap(tab,imgs) :
-    for x in range(10) :
-        for y in range(10) :
+    for x in range(16) :
+        for y in range(12) :
             screen.blit(imgs[tab[y][x]],(x*larg,y*larg) )
      
 def getMap(x,y,):
-    if x<0 or y <0 or x >9 or y > 9:
+    if x<0 or y <0 or x >15 or y > 11:
         return -1;
     return themap[y][x]
 def setMap(x,y,val):
@@ -62,7 +63,7 @@ def Push(posX,posY,ani):
     elif ani == 4 :
         a = posX + 0
         b = posY - 1
-        c = posX + 0
+        c = posX + 0 
         d = posY - 2
     print a,b
     if ((getMap(a,b)==2) and (getMap(c,d)==0)): # si diammant et case vide
@@ -78,12 +79,27 @@ def Push(posX,posY,ani):
     elif ((getMap(a,b)==4) and (getMap(c,d)==3)): # si diammant et case vide
         setMap(a,b,3)
         setMap(c,d,4)
+        
+def Move(ani,dir,posX,posY):
+    if dir == 2 :
+        if testCol(posX -1 ,posY ):
+            posY = posY + 1
+            print 2,1
+        else :
+            print 2,0
+    elif dir == 3 :
+        if testCol(posX +1 ,posY ):
+            posY = posY + 1
+    elif dir == 4:
+        if testCol(posX ,posY -1 ):
+            posY = posY + 1 
+    return(ani)
     
         
 for i in range(14):
-    tiles.append( pygame.image.load("%s.png" % i ) )
+    tiles.append( pygame.image.load("Tiles/%s.png" % i ) )
 
-size = width, height = 640, 640
+size = width, height = 1024, 768
 
 screen = pygame.display.set_mode(size)
 
@@ -116,21 +132,40 @@ while True :
         posX = 4
         posY = 8     
     elif lvl == 0 :
-        themap = [  [1,1,1,1,1,6,6,6,6,6],
-                    [1,0,0,0,1,6,6,6,6,6],
-                    [1,0,0,0,1,6,6,6,6,6],
-                    [1,0,0,3,1,7,6,6,6,6],
-                    [1,0,0,0,1,6,6,6,6,6],
-                    [1,0,2,0,1,6,6,6,6,6],
-                    [1,0,0,0,1,6,6,6,6,6],
-                    [1,0,0,3,1,8,6,6,6,6],
-                    [1,0,0,0,1,6,6,6,6,6],
-                    [1,1,1,1,1,6,6,6,6,6]         
+        themap = [  [1,1,1,1,1,6,6,6,6,6,6,6,6,6,6,6],
+                    [1,0,0,0,1,6,6,6,6,6,6,6,6,6,6,6],
+                    [1,0,0,0,1,6,6,6,6,6,6,6,6,6,6,6],
+                    [1,0,0,3,1,7,6,6,6,6,6,6,6,6,6,6],
+                    [1,0,0,0,1,6,6,6,6,6,6,6,6,6,6,6],
+                    [1,0,2,0,1,6,6,6,6,6,6,6,6,6,6,6],
+                    [1,0,0,0,1,6,6,6,6,6,6,6,6,6,6,6],
+                    [1,0,0,3,1,8,6,6,6,6,6,6,6,6,6,6],
+                    [1,0,0,0,1,6,6,6,6,6,6,6,6,6,6,6],
+                    [1,1,1,1,1,6,6,6,6,6,6,6,6,6,6,6],
+                    [1,1,1,1,1,6,6,6,6,6,6,6,6,6,6,6],
+                    [1,1,1,1,1,6,6,6,6,6,6,6,6,6,6,6]       
         ]
         posX = 1
         posY = 5
         
     elif lvl == 1 :
+        themap = [  [1,1,1,1,1,6,6,6,6,6,6,6,6,6,6,6],
+                    [1,0,0,0,1,6,6,6,6,6,6,6,6,6,6,6],
+                    [1,0,0,0,1,6,6,6,6,6,6,6,6,6,6,6],
+                    [1,0,0,3,1,7,6,6,6,6,6,6,6,6,6,6],
+                    [1,0,0,0,1,6,6,6,6,6,6,6,6,6,6,6],
+                    [1,0,2,0,1,6,6,6,6,6,6,6,6,6,6,6],
+                    [1,0,0,0,1,6,6,6,6,6,6,6,6,6,6,6],
+                    [1,0,0,3,1,8,6,6,6,6,6,6,6,6,6,6],
+                    [1,0,0,0,1,6,6,6,6,6,6,6,6,6,6,6],
+                    [1,1,1,1,1,6,6,6,6,6,6,6,6,6,6,6],
+                    [1,1,1,1,1,6,6,6,6,6,6,6,6,6,6,6],
+                    [1,1,1,1,1,6,6,6,6,6,6,6,6,6,6,6]       
+        ]
+        posX = 1
+        posY = 5
+        
+    elif lvl == 9 :
         themap = [  [6,6,6,6,6,6,6,6,6,6],
                     [6,6,1,1,1,1,1,6,6,6],
                     [6,6,1,3,3,3,1,6,6,6],
@@ -205,7 +240,7 @@ while True :
         posX = 7
         posY = 6
     
-    img = pygame.image.load("Perso%sDown.png" % Perso )
+    img = pygame.image.load("Perso/Perso%s/Down.png" % Perso )
   
     while End() != 1 and Reset != 1:
         for event in pygame.event.get():
@@ -249,37 +284,36 @@ while True :
 
             
         if (keys[K_LEFT] and not keys_old[K_LEFT]):
-            img = pygame.image.load("Perso%sLeft.png"%Perso)
-            if ani == 2 :
-                if testCol(posX - 1 ,posY):
-                    posX = posX -1
-            if ani != 2 :
-                ani = 2
-                    
+            img = pygame.image.load("Perso/Perso%s/Left.png"%Perso)
+            if dir == 2: 
+                if testCol(posX -1 ,posY):
+                    posX = posX - 1
+            dir = 2
+            ani = 2
+            
         if (keys[K_RIGHT] and not keys_old[K_RIGHT]):
-            img = pygame.image.load("Perso%sRight.png"%Perso) 
-            if ani == 3 :
-                if testCol(posX +1,posY  ):        
-                    posX = posX +1
-            elif ani != 3 :
-                ani = 3                
-
+            img = pygame.image.load("Perso/Perso%s/Right.png"%Perso) 
+            if dir == 3: 
+                if testCol(posX +1 ,posY):
+                    posX = posX + 1
+            dir = 3
+            ani = 3
+            
         if (keys[K_DOWN] and not keys_old[K_DOWN]):
-            img = pygame.image.load( "Perso%sDown.png" % Perso ) 
-            if ani == 1 :
+            img = pygame.image.load( "Perso/Perso%s/Down.png" % Perso )
+            if dir == 1: 
                 if testCol(posX ,posY +1 ):
                     posY = posY + 1
-            elif ani != 1 :
-                ani = 1  
-                
-                
+            dir = 1
+            ani = 1
+            
         if (keys[K_UP] and not keys_old[K_UP]):
-            img = pygame.image.load("Perso%sUp.png"%Perso) 
-            if ani == 4 :
-                if testCol(posX ,posY -1 ):        
+            img = pygame.image.load("Perso/Perso%s/Up.png"%Perso) 
+            if dir == 4: 
+                if testCol(posX ,posY -1 ):
                     posY = posY - 1
-            elif ani != 4 :
-                ani = 4                
+            dir = 4
+            ani = 4
 
         if (keys[K_SPACE] and not keys_old[K_SPACE]):
             Reset = 1
